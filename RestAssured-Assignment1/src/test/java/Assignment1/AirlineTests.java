@@ -28,10 +28,15 @@ public class AirlineTests {
         // Get airline details using the GET method and validate the response using assertions.
         @Test
         public void getAirlineInfo(){
-            String baseURL = "https://api.instantwebtools.net/v1/airlines/id";
-            Map<String, Object> payload = Payloads.getAirlineInfoPayloadByMap("252d3bca-d9bb-476c-9a97-562d685e235c");
-            Response response = RestUtils.performGet(baseURL, new HashMap<>());
-            Assert.assertEquals(response.statusCode(),204);
+            String baseURL = "https://api.instantwebtools.net/v1/airlines/%s";
+            String airlineID = "efa682a5-65a1-4665-b1a8-f6483b674692";
+            String urlWithID = String.format(baseURL, airlineID);
+            Map<String, Object> payload = Payloads.getAirlineInfoPayloadByMap(airlineID);
+            Response response = RestUtils.performGet(urlWithID, payload, new HashMap<>());
+            String responseAirlineId = response.jsonPath().getString("_id").replaceAll("\"", "");;
+            Assert.assertEquals(response.statusCode(), 200);
+            Assert.assertEquals(responseAirlineId, airlineID);
+
         }
 
     }

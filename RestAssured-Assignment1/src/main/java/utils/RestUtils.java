@@ -18,7 +18,7 @@ public class RestUtils {
                 .then().log().all().extract().response();
     }
 
-    public static Response performGet(String endPoint, Map<String, String> headers){
+    public static Response performGet(String endPoint, Map<String, Object> requestPayload, Map<String, String> headers){
         return RestAssured.given().log().all()
                 .baseUri(endPoint)
                 .headers(headers)
