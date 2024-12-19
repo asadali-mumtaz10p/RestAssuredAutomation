@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.RestUtils;
 import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.Matchers.equalTo;
@@ -15,32 +17,21 @@ public class AirlineTests {
     // Create a new airline using the POST method and validate the response using assertions.
     @Test
     public void createAirlineTest() {
-        String baseUrl = "https://api.instantwebtools.net/v1/airlines";
-        String payLoad = "{\n" +
-                "\"_id\": \"152356\", \n" +
-                "\"name\": \"Assignment 1 Airline\", \n" +
-                "\"country\": \"Pakistan\", \n" +
-                "\"logo\": \"https://example.com/logos/american_airlines.png\", \n" +
-                "\"slogan\": \"Assignment1\", \n" +
-                "\"head_quarters\": \"Karachi\", \n" +
-                "\"website\": \"https://www.assignment1.com\", \n" +
-                "\"established\": \"2024\", \n" +
-                "}";
-        Response response = RestUtils.performPost(baseUrl, payLoad, new HashMap<>());
-        Assert.assertEquals(response.statusCode(), 200, "Status code mismatch");
-    }
+            String baseURL = "https://api.instantwebtools.net/v1/airlines";
+            Map<String, Object> payload = Payloads.getAirlinePayloadByMap("252d3bca-d9bb-476c-9a97-562d685e235c", "Karachi Airways",
+                    "Pakistan", "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/sri_lanka.png",
+                    "From Pakistan","Karachi, Pakistan", "www.karachiairways.com", "2024");
+            Response response = RestUtils.performPost(baseURL, payload, new HashMap<>());
+            Assert.assertEquals(response.statusCode(),200);
+        }
+
+        // Get airline details using the GET method and validate the response using assertions.
         @Test
         public void getAirlineInfo(){
-            RestAssured.baseURI = "https://api.instantwebtools.net/v1/airlines";
-            String ID = "73dd5420-3bf9-48f3-a0b6-17cf7aa61b19";
-            Response response = given()
-                    .pathParam("id", ID).when().get("/{id}");
-                     response.then()
-                    .log().all()
-                    .contentType(JSON)
-                    .body("id", equalTo(ID));
-            Assert.assertEquals(response.statusCode(), 200, "Status code mismatch");
-            System.out.println(response.asString());
+            String baseURL = "https://api.instantwebtools.net/v1/airlines/id";
+            Map<String, Object> payload = Payloads.getAirlineInfoPayloadByMap("252d3bca-d9bb-476c-9a97-562d685e235c");
+            Response response = RestUtils.performGet(baseURL, new HashMap<>());
+            Assert.assertEquals(response.statusCode(),204);
         }
 
     }

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class RestUtils {
 
-    public static Response performPost(String endPoint, Map<String, Object> requestPayload, Map<String, String> headers){
+    public static Response performPost(String endPoint, String requestPayload, Map<String, String> headers){
         return RestAssured.given().log().all()
                 .baseUri(endPoint)
                 .contentType(ContentType.JSON)
@@ -18,11 +18,14 @@ public class RestUtils {
                 .then().log().all().extract().response();
     }
 
-    public static Response performGet(String endPoint, Map<String, String> headers){
+    public static Response performPost(String endPoint, Map <String, Object> requestPayload, Map<String, String> headers){
         return RestAssured.given().log().all()
                 .baseUri(endPoint)
+                .contentType(ContentType.JSON)
                 .headers(headers)
-                .get()
+                .body(requestPayload)
+                .post()
                 .then().log().all().extract().response();
+
     }
 }
