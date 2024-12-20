@@ -9,7 +9,7 @@ public class PassengerAPIs {
         String endPoint = (String) Base.dataFromJsonFileDev.get("createPassengerEndPoint");
         return RestUtils.performPost(endPoint, createPassengerPayload, new HashMap<>());
     }
-    public Response updatePassenger(String updatePassengerPayload) {
+    public Response  updatePassenger(String updatePassengerPayload) {
         String endPoint = (String) Base.dataFromJsonFileQa.get("updatePassengerEndPoint");
         return RestUtils.performPatch(endPoint, updatePassengerPayload, new HashMap<>());
     }
