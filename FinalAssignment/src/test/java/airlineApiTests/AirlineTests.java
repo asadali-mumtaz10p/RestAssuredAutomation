@@ -1,34 +1,40 @@
 package airlineApiTests;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.RestUtils;
+import RestUtils.RestUtils;
 
 import java.util.HashMap;
-import java.util.Map;
 
-public class AirlineTests {
+public class AirlineTests extends PassengerAPIs {
 
     @Test
-    public void createAirlineTest(){
-        String baseURL = "https://api.instantwebtools.net/v1/airlines";
-        String payload = Payloads.getAirlinePayloadViaString("252d3bca-d9bb-476c-9a97-562d685e235c", "Karachi Airways",
-                "Pakistan", "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/sri_lanka.png",
-                "From Pakistan","Karachi, Pakistan", "www.karachiairways.com", "2024");
-        Response response = RestUtils.performPost(baseURL, payload, new HashMap<>());
+    public void createPassenger(){
+        String payload = Payloads.getPassengerPayloadViaString("asad", "5", "66038402-402d-4a3f-baef-7cb5f53697a8");
+        Response response = createPassenger(payload);
         Assert.assertEquals(response.statusCode(),200);
     }
 
     @Test
-    public void createAirlineTestWithMap(){
-        String baseURL = "https://api.instantwebtools.net/v1/airlines";
-        Map<String, Object> payload = Payloads.getAirlinePayloadByMap("252d3bca-d9bb-476c-9a97-562d685e235c", "Karachi Airways",
-                "Pakistan", "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Qatar_Airways_Logo.svg/sri_lanka.png",
-                "From Pakistan","Karachi, Pakistan", "www.karachiairways.com", "2024");
-        Response response = RestUtils.performPost(baseURL, payload, new HashMap<>());
+    public void getPassenger(){
+        String baseURL = "https://api.instantwebtools.net/v1/passenger/67651941596c781cbd71bce5";
+        Response response = RestAssured.get(baseURL);
         Assert.assertEquals(response.statusCode(),200);
     }
+
+    @Test
+    public void updatePassenger(){
+        String payload = Payloads.updatePassengerPayloadViaString("asad ali");
+        Response response = updatePassenger(payload);
+        Assert.assertEquals(response.statusCode(),200);
+    }
+    @Test
+    public void deletePassenger(){
+        String baseURL = "https://api.instantwebtools.net/v1/passenger/67651941596c781cbd71bce5";
+        Response response = RestAssured.delete(baseURL);
+        Assert.assertEquals(response.statusCode(),204);
+    }
+
 }
