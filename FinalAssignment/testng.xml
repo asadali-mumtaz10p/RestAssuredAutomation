@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="C:/RestAssuredAutomation/RestAssuredAutomation/FinalAssignment">
+        <classes>
+            <class name="airlineApiTests.AirlineTests">
+                <methods>
+                    <include name="createPassenger"/>
+                    <include name="getPassenger"/>
+                    <include name="updatePassenger"/>
+                    <include name="deletePassenger"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
