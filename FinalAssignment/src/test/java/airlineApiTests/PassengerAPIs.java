@@ -16,7 +16,7 @@ public class PassengerAPIs {
     @Step
     public Response createPassenger(Passenger createPassengerPayload){
         String endPoint = (String) Base.dataFromJsonFileDev.get("createPassengerEndPoint");
-        return RestUtils.performPost(endPoint, String.valueOf(createPassengerPayload), new HashMap<>());
+        return RestUtils.performPost(endPoint, createPassengerPayload, new HashMap<>());
     }
     @Step
     public Response  updatePassenger(String updatePassengerPayload) {

@@ -18,6 +18,9 @@ public class AirlineTests extends PassengerAPIs {
         String payload = Payloads.getPassengerPayloadByFakerClass();
         Response response = createPassenger(payload);
         Assert.assertEquals(response.statusCode(), 200);
+        String name = response.jsonPath().getString("name");
+        Assert.assertNotNull(name, "Name should not be null");
+        System.out.println("Passenger Name: " + name);
     }
     @Test
     @Description("This is creating a new Passenger through Pojo")
@@ -25,6 +28,9 @@ public class AirlineTests extends PassengerAPIs {
         Passenger payload = Payloads.getPassengerPayloadUsingPojo();
         Response response = createPassenger(payload);
         Assert.assertEquals(response.statusCode(), 200);
+        String name = response.jsonPath().getString("name");
+        Assert.assertEquals(name, payload.getName(), "Name should match the payload");
+        System.out.println("Passenger Name: " + name);
     }
     @Test
     @Description("This is updating the Passenger through Data Faker")
@@ -36,7 +42,7 @@ public class AirlineTests extends PassengerAPIs {
     @Test
     @Description("This is updating the Passenger through Pojo")
     public void updatePassengerWithPojo() {
-        String payload = String.valueOf(Payloads.updatePassengerPayloadWithPojo());
+        Passenger payload = Payloads.updatePassengerPayloadWithPojo();
         Response response = updatePassenger(payload);
         Assert.assertEquals(response.statusCode(), 200);
     }
