@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: airlineApiTests.AirlineTests
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.535 s -- in airlineApiTests.AirlineTests

@@ -1,4 +1,5 @@
 airlineApiTests\PassengerAPIs.class
+RestUtils\RestUtils.class
 airlineApiTests\AirlineTests.class
 airlineApiTests\Base.class
 airlineApiTests\Payloads.class
